@@ -1,10 +1,12 @@
 #!/usr/bin/env swift
-
 //
 // ObfuscationDemo.swift
 // Demonstration script for string obfuscation
 //
-// Usage: swift ObfuscationDemo.swift
+// Usage: 
+//   Interactive mode: swift ObfuscationDemo.swift
+//   Run all demos:    swift ObfuscationDemo.swift --all
+//   Show help:        swift ObfuscationDemo.swift --help
 //
 
 import Foundation

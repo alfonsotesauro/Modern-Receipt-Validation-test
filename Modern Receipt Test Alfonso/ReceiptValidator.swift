@@ -25,11 +25,15 @@ class ReceiptValidator: ObfuscatedOperations {
     // These strings are obfuscated using XOR with key 0x42
     // Actual values are decoded at runtime to avoid hardcoding in binary
     
-    // "receipt" - obfuscated
+    // "receipt" - XOR(0x42) -> obfuscated
     private static let obfuscatedReceiptPath: [UInt8] = [0x30, 0x27, 0x25, 0x27, 0x29, 0x32, 0x34]
     
-    // "Contents/_MASReceipt/receipt" - obfuscated 
-    private static let obfuscatedMASPath: [UInt8] = [0x01, 0x2f, 0x2e, 0x34, 0x27, 0x2e, 0x34, 0x31, 0x61, 0x5d, 0x0d, 0x03, 0x11, 0x30, 0x27, 0x25, 0x27, 0x29, 0x32, 0x34, 0x61, 0x30, 0x27, 0x25, 0x27, 0x29, 0x32, 0x34]
+    // "Contents/_MASReceipt/receipt" - XOR(0x42) -> obfuscated 
+    private static let obfuscatedMASPath: [UInt8] = [
+        0x01, 0x2f, 0x2e, 0x34, 0x27, 0x2e, 0x34, 0x31, 0x61,
+        0x5d, 0x0d, 0x03, 0x11, 0x30, 0x27, 0x25, 0x27, 0x29,
+        0x32, 0x34, 0x61, 0x30, 0x27, 0x25, 0x27, 0x29, 0x32, 0x34
+    ]
     
     // Bundle identifier obfuscation key
     private static let bundleKey: UInt8 = 0x42
@@ -256,13 +260,19 @@ class ReceiptValidator: ObfuscatedOperations {
     
     /// Gets Apple's root certificate for verification
     /// In production, embed the actual certificate in the app
+    /// TODO: For production, embed Apple's actual root certificate DER data
     private func getAppleRootCertificate() -> SecCertificate? {
         // Apple Inc. Root Certificate
         // In a production app, embed the actual DER-encoded certificate
-        // This is a placeholder for the demo
+        // This is a placeholder for the demo - returns nil to demonstrate structure
         
         // The real certificate can be obtained from:
         // https://www.apple.com/certificateauthority/
+        
+        // Production implementation would:
+        // 1. Embed certificate as Data in app bundle or as obfuscated bytes
+        // 2. let certData = Data([/* DER encoded certificate bytes */])
+        // 3. return SecCertificateCreateWithData(nil, certData as CFData)
         
         // For this demo, we'll return nil and skip actual verification
         // In production, decode the embedded certificate data
